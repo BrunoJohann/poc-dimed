@@ -3,6 +3,8 @@ import { BuscaInicialService } from 'src/app/services/busca/busca-inicial.servic
 import { retry } from 'rxjs/operators';
 import { BuscaDetalhesService } from 'src/app/services/busca-detalhes/busca-detalhes.service';
 import { ItemFinal } from 'src/app/model/ItemFinal';
+import { forkJoin } from 'rxjs';
+import { BuscaEstoqueService } from 'src/app/services/busca-estoque/busca-estoque.service';
 
 @Component({
   selector: 'app-input-busca',
@@ -16,8 +18,9 @@ export class InputBuscaComponent {
   @Output() resBuscaApi = new EventEmitter();
 
   constructor(
-    private buscaService: BuscaInicialService,
-    private buscaDetalheService: BuscaDetalhesService ) { }
+    public buscaService: BuscaInicialService,
+    public buscaDetalheService: BuscaDetalhesService,
+    public buscaEStoqueService: BuscaEstoqueService ) { }
 
   buscaProduto(event: string) {
   this.buscaService.getProduto(event)
@@ -33,11 +36,12 @@ export class InputBuscaComponent {
 
   postDetalhe(listaItens: ItemFinal[]) {
     listaItens.filter( item => {
-      this.buscaDetalheService.buscarDetalhes(item.codigoItem)
+      this.getForkJoin(item.codigoItem)
         .subscribe(res => {
-          if(res.itens[0]){
-            item.ean = res.itens[0].ean
-            item.precoPor = res.itens[0].precoPor
+          if(res[0].itens[0]){
+            item.ean = res[0].itens[0].ean
+            item.precoPor = res[0].itens[0].precoPor
+            item.estoqueLoja = res[1][0].estoqueLoja
           } else {
             false
           }
@@ -48,6 +52,17 @@ export class InputBuscaComponent {
 
   enviaComponentePai(listaItens) {
     this.resBuscaApi.emit(listaItens)
+  }
+
+  getForkJoin(codigo) {
+    return forkJoin([
+        this.buscaDetalheService.buscarDetalhes(codigo),
+        this.buscaEStoqueService.getEstoque(codigo)
+      ]
+    )
+    // const detalhes = this.buscaDetalheService.buscarDetalhes(codigo)
+    // const estoque = this.buscaEStoqueService.getEstoque(codigo)
+    // return forkJoin([detalhes, estoque]);
   }
 
 }
