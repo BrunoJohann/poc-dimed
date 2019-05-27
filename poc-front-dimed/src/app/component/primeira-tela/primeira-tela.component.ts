@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Produto } from 'src/app/model/Produto';
 
 @Component({
   selector: 'app-primeira-tela',
   templateUrl: './primeira-tela.component.html',
   styleUrls: ['./primeira-tela.component.css']
 })
-export class PrimeiraTelaComponent implements OnInit {
+export class PrimeiraTelaComponent {
+
+  listaDeItens: Produto[];
 
   constructor() { }
 
-  ngOnInit() {
-    
-  }
-
   resInputFilho(event) {
-    console.log(event)
+    this.listaDeItens = event
+    console.log("pai: ", this.listaDeItens)
   }
 
 }

@@ -2,4 +2,13 @@
   resultado-busca works!
 </p>
 
-<div></div>
+<div *ngFor="let item of listaDoPai">
+  <div *ngIf="item.nomeDetalhado">
+    <div>Descrição: {{ item.nomeDetalhado }}</div>
+    <div>Preço: {{ item.precoPor }}</div>
+    <div>EAN: {{ item.ean }}</div>
+    <div>Código: {{ item.codigoItem }}</div>
+    <!-- <div>Código: {{ item.codigoItem }}</div> -->
+    <app-detalhes-item></app-detalhes-item>
+  </div>
+</div>

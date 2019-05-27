@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Produto } from 'src/app/model/Produto';
 
 @Component({
   selector: 'app-resultado-busca',
   templateUrl: './resultado-busca.component.html',
   styleUrls: ['./resultado-busca.component.css']
 })
-export class ResultadoBuscaComponent implements OnInit {
+export class ResultadoBuscaComponent implements OnChanges {
+
+  @Input() listaDoPai: Produto[]
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
+    console.log("Filho", this.listaDoPai);
   }
 
 }

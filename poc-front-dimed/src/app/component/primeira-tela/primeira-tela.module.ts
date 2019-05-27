@@ -3,18 +3,16 @@ import { CommonModule } from '@angular/common';
 import { InputBuscaModule } from '../input-busca/input-busca.module';
 
 import { PrimeiraTelaComponent } from './primeira-tela.component';
-import { ResultadoBuscaComponent } from '../resultado-busca/resultado-busca.component';
-import { DetalhesItemComponent } from '../detalhes-item/detalhes-item.component';
+import { ResultadoBuscaModule } from '../resultado-busca/resultado-busca.module';
 
 @NgModule({
   declarations: [
-    PrimeiraTelaComponent,
-    ResultadoBuscaComponent,
-    DetalhesItemComponent
+    PrimeiraTelaComponent
   ],
   imports: [
     CommonModule,
-    InputBuscaModule
+    InputBuscaModule,
+    ResultadoBuscaModule
   ],
   exports: [
     PrimeiraTelaComponent
