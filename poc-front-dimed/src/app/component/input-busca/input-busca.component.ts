@@ -5,6 +5,8 @@ import { BuscaDetalhesService } from 'src/app/services/busca-detalhes/busca-deta
 import { ItemFinal } from 'src/app/model/ItemFinal';
 import { forkJoin } from 'rxjs';
 import { BuscaEstoqueService } from 'src/app/services/busca-estoque/busca-estoque.service';
+import { ProdutoDetalhe } from 'src/app/model/EstruturaPost/ProdutoDetalhe';
+import { Estoque } from 'src/app/model/Estoque';
 
 @Component({
   selector: 'app-input-busca',
@@ -39,15 +41,32 @@ export class InputBuscaComponent {
       this.getForkJoin(item.codigoItem)
         .subscribe(res => {
           if(res[0].itens[0]){
-            item.ean = res[0].itens[0].ean
-            item.precoPor = res[0].itens[0].precoPor
-            item.estoqueLoja = res[1][0].estoqueLoja
+            // item.ean = res[0].itens[0].ean
+            // item.precoPor = res[0].itens[0].precoPor
+            // item.estoqueLoja = res[1][0].estoqueLoja
+            this.atribuirValores(item, res)
           } else {
             false
           }
         })
     } )
     this.enviaComponentePai(listaItens)
+  }
+
+  atribuirValores(item: ItemFinal, resFork: [ProdutoDetalhe, Estoque]) {
+    item.ean = resFork[0].itens[0].ean
+    item.precoPor = resFork[0].itens[0].precoPor
+    item.origemDesconto = resFork[0].itens[0].origemDesconto
+    item.precoDe = resFork[0].itens[0].precoDe
+    item.nomenclatura = resFork[0].itens[0].nomenclatura
+    item.nomenclaturaDetalhada = resFork[0].itens[0].nomenclaturaDetalhada
+    item.principioAtivo = resFork[0].itens[0].principioAtivo
+    item.classeTerapeutica = resFork[0].itens[0].classeTerapeutica
+    item.situacaoItem = resFork[0].itens[0].situacaoItem
+    item.advertencias = resFork[0].itens[0].advertencias
+    item.categorias = resFork[0].itens[0].categorias
+    item.estoqueLoja = resFork[1][0].estoqueLoja
+    return item
   }
 
   enviaComponentePai(listaItens) {
@@ -60,9 +79,6 @@ export class InputBuscaComponent {
         this.buscaEStoqueService.getEstoque(codigo)
       ]
     )
-    // const detalhes = this.buscaDetalheService.buscarDetalhes(codigo)
-    // const estoque = this.buscaEStoqueService.getEstoque(codigo)
-    // return forkJoin([detalhes, estoque]);
   }
 
 }
