@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Produto } from 'src/app/model/Produto';
+import { Component, Input, OnChanges } from '@angular/core';
+import { ItemFinal } from 'src/app/model/ItemFinal';
 
 @Component({
   selector: 'app-resultado-busca',
@@ -8,7 +8,7 @@ import { Produto } from 'src/app/model/Produto';
 })
 export class ResultadoBuscaComponent implements OnChanges {
 
-  @Input() listaDoPai: Produto[]
+  @Input() listaDoPai: ItemFinal[]
 
   constructor() { }
 

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Produto } from 'src/app/model/Produto';
+import { Component } from '@angular/core';
+import { ItemFinal } from 'src/app/model/ItemFinal';
 
 @Component({
   selector: 'app-primeira-tela',
@@ -8,7 +8,7 @@ import { Produto } from 'src/app/model/Produto';
 })
 export class PrimeiraTelaComponent {
 
-  listaDeItens: Produto[];
+  listaDeItens: ItemFinal[];
 
   constructor() { }
 

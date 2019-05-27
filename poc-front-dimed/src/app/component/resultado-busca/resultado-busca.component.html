@@ -4,11 +4,11 @@
 
 <div *ngFor="let item of listaDoPai">
   <div *ngIf="item.nomeDetalhado">
-    <div>Descrição: {{ item.nomeDetalhado }}</div>
+    <h3>Descrição: {{ item.nomeDetalhado }}</h3>
     <div>Preço: {{ item.precoPor }}</div>
     <div>EAN: {{ item.ean }}</div>
     <div>Código: {{ item.codigoItem }}</div>
     <div>Código: {{ item.estoqueLoja }}</div>
-    <app-detalhes-item></app-detalhes-item>
+    <app-detalhes-item [itemFinal]="item"></app-detalhes-item>
   </div>
 </div>

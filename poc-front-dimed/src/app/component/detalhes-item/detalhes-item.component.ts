@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ItemFinal } from 'src/app/model/ItemFinal';
 
 @Component({
   selector: 'app-detalhes-item',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detalhes-item.component.css']
 })
 export class DetalhesItemComponent implements OnInit {
+
+  @Input() itemFinal: ItemFinal
 
   constructor() { }
 
