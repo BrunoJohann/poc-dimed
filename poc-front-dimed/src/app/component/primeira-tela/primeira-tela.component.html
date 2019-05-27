@@ -1,7 +1,9 @@
-<p>
-  primeira-tela works!
-</p>
 
-<app-input-busca></app-input-busca>
-<app-resultado-busca  ></app-resultado-busca>
-<app-detalhes-item  ></app-detalhes-item>
+<h3>
+  Busca produtos
+</h3>
+
+<app-input-busca (resBuscaApi)="resInputFilho($event)"></app-input-busca>
+
+<app-resultado-busca ></app-resultado-busca>
+<!-- <app-detalhes-item></app-detalhes-item> -->

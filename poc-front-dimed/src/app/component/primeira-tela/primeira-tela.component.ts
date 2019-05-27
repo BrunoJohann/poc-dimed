@@ -13,4 +13,8 @@ export class PrimeiraTelaComponent implements OnInit {
     
   }
 
+  resInputFilho(event) {
+    console.log(event)
+  }
+
 }
