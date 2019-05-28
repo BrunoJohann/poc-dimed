@@ -1,14 +1,16 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { BuscaInicialService } from 'src/app/services/busca/busca-inicial.service';
+import { Component, Output, EventEmitter, OnChanges } from '@angular/core';
+import { forkJoin, of, Observable } from 'rxjs';
 import { retry } from 'rxjs/operators';
-import { BuscaDetalhesService } from 'src/app/services/busca-detalhes/busca-detalhes.service';
+
 import { ItemFinal } from 'src/app/model/ItemFinal.model';
-import { forkJoin } from 'rxjs';
-import { BuscaEstoqueService } from 'src/app/services/busca-estoque/busca-estoque.service';
 import { ProdutoDetalhe } from 'src/app/model/EstruturaPost/ProdutoDetalhe.model';
 import { Estoque } from 'src/app/model/Estoque.model';
-import { BuscaPrecoService } from 'src/app/services/busca-preco/busca-preco.service';
 import { Precos } from 'src/app/model/EstruturaPreco/Precos.model';
+
+import { BuscaInicialService } from 'src/app/services/busca/busca-inicial.service';
+import { BuscaDetalhesService } from 'src/app/services/busca-detalhes/busca-detalhes.service';
+import { BuscaEstoqueService } from 'src/app/services/busca-estoque/busca-estoque.service';
+import { BuscaPrecoService } from 'src/app/services/busca-preco/busca-preco.service';
 
 @Component({
   selector: 'app-input-busca',
@@ -17,7 +19,7 @@ import { Precos } from 'src/app/model/EstruturaPreco/Precos.model';
 })
 export class InputBuscaComponent {
 
-  public listaItens: ItemFinal[];
+  // public listaItens: ItemFinal[];
 
   @Output() resBuscaApi = new EventEmitter();
 
@@ -32,8 +34,7 @@ export class InputBuscaComponent {
           .pipe(retry(3))
           .subscribe({
             next: listaItens => {
-              this.listaItens = listaItens
-              this.postDetalhe(this.listaItens)
+              this.postDetalhe(listaItens)
             },
             error: err => console.log(err)
           });
@@ -42,24 +43,34 @@ export class InputBuscaComponent {
   postDetalhe(listaItens: ItemFinal[]) {
     // let detalhes = this.buscaDetalheService.getDetalhes(listaItens);
     // detalhes.subscribe(res => console.log(res))
-
-    listaItens.filter( item => {
+    
+    listaItens.map( item => {
       this.getForkJoin(item.codigoItem)
         .subscribe(res => {
-          if(res[0].itens[0]){
+          if( res[0].itens[0] ){
             this.atribuirValores(item, res)
-          } else {
-            false
-          }
+          } 
         })
-    } )
+    })
+    // this.forAtribuidor(listaItens).subscribe(res => console.log(res))
     this.enviaComponentePai(listaItens)
+  }
+
+  forAtribuidor(listaItens): Observable<ItemFinal[]>{
+    return listaItens.map( item => {
+      this.getForkJoin(item.codigoItem)
+        .subscribe(res => {
+          if( res[0].itens[0] ){
+            this.atribuirValores(item, res)
+          } 
+        })
+    })
   }
 
   atribuirValores(item: ItemFinal, resFork: [ProdutoDetalhe, Estoque, Precos]) {
     let detalhe = resFork[0].itens[0];
     let estoque = resFork[1][0];
-    let preco = resFork[2][0].preco
+    let preco = resFork[2][0].preco;
 
     item.ean = detalhe.ean
     item.origemDesconto = detalhe.origemDesconto
@@ -71,13 +82,19 @@ export class InputBuscaComponent {
     item.advertencias = detalhe.advertencias
     item.categorias = detalhe.categorias
     item.estoqueLoja = estoque.estoqueLoja
-    item.precoPor = preco.precoPor
+    item.precoPor = preco.precoPor?preco.precoPor:undefined
     item.precoDe = preco.precoDe
     item.precoVenda = preco.precoVenda
     return item
   }
 
   enviaComponentePai(listaItens) {
+    // listaItens.map(res => res.codigoItem==872440? console.log(res):res)
+    // listaItens.filter( item => {
+    //   if(typeof item.precoPor === 'undefined') {
+    //     console.log(item.codigoItem, item.precoPor)
+    //   }
+    // })
     this.resBuscaApi.emit(listaItens)
   }
 
@@ -90,11 +107,5 @@ export class InputBuscaComponent {
     )
   }
 
-  // getForkJoinConjunto(listaItens: ItemFinal[]) {
-  //   let detalhes = this.buscaDetalheService.getDetalhes(listaItens);
-  //   let estoque = this.buscaEstoqueService.getArrayEstoque(listaItens);
-  //   let precos = this.buscaPrecoService.getPrecos(listaItens);
-  //   return forkJoin([detalhes, estoque, precos])
-  // }
 
 }

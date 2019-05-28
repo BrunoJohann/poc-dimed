@@ -1,14 +1,28 @@
-<p>
-  resultado-busca works!
-</p>
 
-<div *ngFor="let item of listaDoPai">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Descrição</th>
+      <th scope="col">precoPor</th>
+      <th scope="col">codigoItem</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of listaDoPai ">
+        <!-- <th scope="row">{{}}</th> -->
+        <td>{{ item.nomenclaturaVarejo }}</td>
+        <td>{{ item.precoPor }}</td>
+        <td>{{ item.codigoItem }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- <div *ngFor="let item of listaDoPai">
   <div *ngIf="item.nomeDetalhado">
     <h3>Descrição: {{ item.nomeDetalhado }}</h3>
     <div>Preço: {{ item.precoPor }}</div>
     <div>EAN: {{ item.ean }}</div>
     <div>Código: {{ item.codigoItem }}</div>
-    <div>Código: {{ item.estoqueLoja }}</div>
     <app-detalhes-item [itemFinal]="item"></app-detalhes-item>
   </div>
-</div>
+</div> -->

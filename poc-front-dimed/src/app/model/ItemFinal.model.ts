@@ -2,6 +2,7 @@ import { Categoria } from './Categoria.model';
 
 export class ItemFinal {
     constructor(
+        public nomeDetalhado?: string,
         public codigoItem?: number,
         public estoqueLoja?: number,
         public precoPor?: number,

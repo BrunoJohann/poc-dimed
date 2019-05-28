@@ -14,6 +14,8 @@ export class ResultadoBuscaComponent implements OnChanges {
 
   ngOnChanges() {
     // console.log("Filho", this.listaDoPai);
+    console.log(this.listaDoPai);
+    
   }
 
 }
