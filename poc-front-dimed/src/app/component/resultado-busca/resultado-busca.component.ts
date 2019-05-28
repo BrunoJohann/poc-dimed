@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { ItemFinal } from 'src/app/model/ItemFinal';
+import { ItemFinal } from 'src/app/model/ItemFinal.model';
 
 @Component({
   selector: 'app-resultado-busca',
@@ -13,7 +13,7 @@ export class ResultadoBuscaComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges() {
-    console.log("Filho", this.listaDoPai);
+    // console.log("Filho", this.listaDoPai);
   }
 
 }

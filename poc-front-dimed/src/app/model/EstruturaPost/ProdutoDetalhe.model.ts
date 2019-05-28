@@ -1,4 +1,4 @@
-import { ItemDetalhe } from './ItemDetalhe';
+import { ItemDetalhe } from './ItemDetalhe.model';
 
 export class ProdutoDetalhe {
     constructor(

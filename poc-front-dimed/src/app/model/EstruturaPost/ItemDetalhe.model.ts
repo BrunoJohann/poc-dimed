@@ -1,14 +1,12 @@
-import { Categoria } from './Categoria';
+import { Categoria } from '../Categoria.model';
 
-export class ItemFinal {
+export class ItemDetalhe {
     constructor(
-        public codigoItem?: number,
-        public estoqueLoja?: number,
+        public codigo?: number,
         public precoPor?: number,
-        public nomenclaturaVarejo?: string,
+        public precoDe?: number,
         public ean?: number,
         public origemDesconto?: string,
-        public precoDe?: number,
         public nomenclatura?: string,
         public nomenclaturaDetalhada?: string,
         public principioAtivo?: string,

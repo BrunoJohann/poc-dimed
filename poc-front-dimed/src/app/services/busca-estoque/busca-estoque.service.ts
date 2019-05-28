@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Estoque } from 'src/app/model/Estoque';
+import { Estoque } from 'src/app/model/Estoque.model';
+import { ItemFinal } from 'src/app/model/ItemFinal.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class BuscaEstoqueService {
 
   getEstoque(codigo) {
     return this.http.get<Estoque>(this.urlEstoque(codigo));
+  }
+
+  getArrayEstoque(listaItens: ItemFinal[]) {
+    return this.http.get<Estoque>(this.urlEstoque(''));
   }
 
 }

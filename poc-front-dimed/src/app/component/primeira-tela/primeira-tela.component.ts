@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ItemFinal } from 'src/app/model/ItemFinal';
+import { ItemFinal } from 'src/app/model/ItemFinal.model';
 
 @Component({
   selector: 'app-primeira-tela',
@@ -14,7 +14,7 @@ export class PrimeiraTelaComponent {
 
   resInputFilho(event) {
     this.listaDeItens = event
-    console.log("pai: ", this.listaDeItens)
+    // console.log("pai: ", this.listaDeItens)
   }
 
 }
