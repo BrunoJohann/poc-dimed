@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ItemFinal } from 'src/app/model/ItemFinal.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -7,14 +7,19 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './detalhes-item.component.html',
   styleUrls: ['./detalhes-item.component.css']
 })
-export class DetalhesItemComponent {
+export class DetalhesItemComponent implements OnInit {
 
   @Input() itemFinal: ItemFinal
 
   constructor( public activeModal: NgbActiveModal ) {
   }
 
-  setItemFinal(item) {
+  ngOnInit() {
+  }
+
+  setItemFinal(item: ItemFinal) {
+    console.log(item);
+    
     this.itemFinal = item;
   }
 

@@ -1,29 +1,31 @@
 
 <div class="modal-header">
-    <h4 class="modal-title">{{ itemFinal.nomenclatura }}</h4>
+    <h3 class="modal-title">{{ itemFinal.nomenclatura }}</h3>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-    <p *ngIf="itemFinal.promocao" >Promocao: {{ itemFinal.promocao.percentualDesconto }}%</p>
-    <h5>Preco: </h5>
+    <ng-container *ngIf="itemFinal.promocao">
+        <h4>Promocao: {{ itemFinal.promocao.percentualDesconto }}%</h4>
+    </ng-container>
+    <h4>Preco: </h4>
     <p>De: <s>{{ itemFinal.precoDe | currency:'R$' }}</s> | Por: {{ itemFinal.precoPor | currency:'R$'}}</p>
-    <h5>Nomeclatura detalhada: </h5>
+    <h4>Nomeclatura detalhada: </h4>
     <p>{{ itemFinal.nomenclaturaDetalhada }}</p>
     <ng-container *ngIf="itemFinal.principioAtivo">
-        <h5>Princípio ativo:</h5>
+        <h4>Princípio ativo:</h4>
         <p>{{ itemFinal.principioAtivo }}</p>
-        <h5>Classe terapeutica:</h5>
+        <h4>Classe terapeutica:</h4>
        <p>{{ itemFinal.classeTerapeutica }}</p>
     </ng-container>
-        <h5>Situação do item: {{ itemFinal.situacaoItem }}</h5>
+        <h4>Situação do item: {{ itemFinal.situacaoItem }}</h4>
     <ng-container>
-        <h5 *ngIf="itemFinal.advertencias[0]">Advertencias:</h5>
+        <h4 *ngIf="itemFinal.advertencias[0]">Advertencias:</h4>
         <div *ngFor="let advertencia of itemFinal.advertencias">{{ advertencia }}</div>
     </ng-container>
     <ng-container>
-        <h5>Categorias:</h5>
+        <h4>Categorias:</h4>
         <ol>
             <li *ngFor="let categoria of itemFinal.categorias">{{ categoria.descricao }}</li>
         </ol>
