@@ -17,6 +17,7 @@ export class ItemFinal {
         public classeTerapeutica?: string,
         public situacaoItem?: string,
         public advertencias?: Array<string>,
-        public categorias?: Categoria[]
+        public categorias?: Categoria[],
+        public mostrarItem?: boolean
     ) {}
 }

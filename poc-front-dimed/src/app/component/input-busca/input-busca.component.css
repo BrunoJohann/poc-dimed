@@ -1,0 +1,17 @@
+.estilo-input {
+    text-align: center;
+    font-size: 25px;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    border-radius: 6px;
+}
+
+.estilo-input:focus {
+    border: 3px solid rgba(154, 209, 235, 0.808);
+}

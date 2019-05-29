@@ -19,7 +19,7 @@ import { BuscaPrecoService } from 'src/app/services/busca-preco/busca-preco.serv
 })
 export class InputBuscaComponent {
 
-  // public listaItens: ItemFinal[];
+  public listaItensFinal: ItemFinal[];
 
   @Output() resBuscaApi = new EventEmitter();
 
@@ -41,30 +41,17 @@ export class InputBuscaComponent {
   }
 
   postDetalhe(listaItens: ItemFinal[]) {
-    // let detalhes = this.buscaDetalheService.getDetalhes(listaItens);
-    // detalhes.subscribe(res => console.log(res))
-    
     listaItens.map( item => {
       this.getForkJoin(item.codigoItem)
         .subscribe(res => {
           if( res[0].itens[0] ){
             this.atribuirValores(item, res)
-          } 
+          } else { 
+            this.atribuirValoresSemResposta(item)
+          }
         })
     })
-    // this.forAtribuidor(listaItens).subscribe(res => console.log(res))
     this.enviaComponentePai(listaItens)
-  }
-
-  forAtribuidor(listaItens): Observable<ItemFinal[]>{
-    return listaItens.map( item => {
-      this.getForkJoin(item.codigoItem)
-        .subscribe(res => {
-          if( res[0].itens[0] ){
-            this.atribuirValores(item, res)
-          } 
-        })
-    })
   }
 
   atribuirValores(item: ItemFinal, resFork: [ProdutoDetalhe, Estoque, Precos]) {
@@ -72,6 +59,7 @@ export class InputBuscaComponent {
     let estoque = resFork[1][0];
     let preco = resFork[2][0].preco;
 
+    item.mostrarItem = true
     item.ean = detalhe.ean
     item.origemDesconto = detalhe.origemDesconto
     item.nomenclatura = detalhe.nomenclatura
@@ -82,19 +70,18 @@ export class InputBuscaComponent {
     item.advertencias = detalhe.advertencias
     item.categorias = detalhe.categorias
     item.estoqueLoja = estoque.estoqueLoja
-    item.precoPor = preco.precoPor?preco.precoPor:undefined
+    item.precoPor = preco.precoPor
     item.precoDe = preco.precoDe
     item.precoVenda = preco.precoVenda
     return item
   }
 
+  atribuirValoresSemResposta(item) {
+    item.mostrarItem = false
+    return item
+  }
+
   enviaComponentePai(listaItens) {
-    // listaItens.map(res => res.codigoItem==872440? console.log(res):res)
-    // listaItens.filter( item => {
-    //   if(typeof item.precoPor === 'undefined') {
-    //     console.log(item.codigoItem, item.precoPor)
-    //   }
-    // })
     this.resBuscaApi.emit(listaItens)
   }
 
