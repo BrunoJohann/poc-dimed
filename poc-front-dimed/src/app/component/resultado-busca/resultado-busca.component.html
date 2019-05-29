@@ -8,23 +8,17 @@
       <th scope="col">Preco</th>
       <th scope="col">Estoque</th>
       <th scope="col">EAN</th>
-      <th scope="col">Detalhe</th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let item of listaDoPai; let cont = index">
-        <ng-container *ngIf="item.mostrarItem">
+  <tbody *ngFor="let item of listaDoPai; let cont = index">
+    <tr (click)="openModal(item)">
+        <ng-container *ngIf="item.mostrarItem && item.ean">
           <!-- <th scope="row">{{ cont }}</th> -->
           <td>{{ item.codigoItem }}</td>
           <td>{{ item.nomenclaturaVarejo }}</td>
           <td>{{ item.precoPor }}</td>
           <td>{{ item.estoqueLoja }}</td>
           <td >{{ item.ean }}</td>
-          <td>
-            <app-detalhes-item [itemFinal]="item">
-
-            </app-detalhes-item>
-          </td>
         </ng-container>  
       </tr>
   </tbody>

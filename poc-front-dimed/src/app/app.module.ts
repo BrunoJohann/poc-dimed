@@ -7,6 +7,9 @@ import { PrimeiraTelaModule } from './component/primeira-tela/primeira-tela.modu
 
 import { AppComponent } from './app.component';
 import { HttpBuscaInterceptorModule } from './interceptor/http-busca-interceptor.module';
+import { ResultadoBuscaComponent } from './component/resultado-busca/resultado-busca.component';
+import { DetalhesItemComponent } from './component/detalhes-item/detalhes-item.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,6 @@ import { HttpBuscaInterceptorModule } from './interceptor/http-busca-interceptor
     PrimeiraTelaModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

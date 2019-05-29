@@ -1,4 +1,5 @@
 import { Categoria } from './Categoria.model';
+import { Promocao } from './Promocao.model';
 
 export class ItemFinal {
     constructor(
@@ -18,6 +19,7 @@ export class ItemFinal {
         public situacaoItem?: string,
         public advertencias?: Array<string>,
         public categorias?: Categoria[],
-        public mostrarItem?: boolean
+        public mostrarItem?: boolean,
+        public promocao?: Promocao,
     ) {}
 }

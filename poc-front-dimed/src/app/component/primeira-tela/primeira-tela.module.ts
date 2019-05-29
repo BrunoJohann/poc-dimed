@@ -5,6 +5,7 @@ import { InputBuscaModule } from '../input-busca/input-busca.module';
 import { PrimeiraTelaComponent } from './primeira-tela.component';
 import { ResultadoBuscaModule } from '../resultado-busca/resultado-busca.module';
 
+
 @NgModule({
   declarations: [
     PrimeiraTelaComponent

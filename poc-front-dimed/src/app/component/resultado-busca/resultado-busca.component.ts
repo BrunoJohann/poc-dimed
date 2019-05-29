@@ -1,20 +1,23 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ItemFinal } from 'src/app/model/ItemFinal.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DetalhesItemComponent } from '../detalhes-item/detalhes-item.component';
 
 @Component({
   selector: 'app-resultado-busca',
   templateUrl: './resultado-busca.component.html',
-  styleUrls: ['./resultado-busca.component.css']
+  styleUrls: ['./resultado-busca.component.css'],
+  // providers: [ NgbModal ]
 })
-export class ResultadoBuscaComponent implements OnChanges {
+export class ResultadoBuscaComponent {
 
   @Input() listaDoPai: ItemFinal[]
 
-  constructor() { }
+  constructor( private modalService: NgbModal ) { }
 
-  ngOnChanges() {
-    // console.log("Filho", this.listaDoPai);
-       
+  public openModal(item: any) {
+    const modal = this.modalService.open(DetalhesItemComponent, { centered: true, size: 'lg' });
+    modal.componentInstance.setItemFinal(item);
   }
 
 }

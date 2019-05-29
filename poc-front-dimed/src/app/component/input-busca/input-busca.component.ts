@@ -47,7 +47,7 @@ export class InputBuscaComponent {
           if( res[0].itens[0] ){
             this.atribuirValores(item, res)
           } else { 
-            this.atribuirValoresSemResposta(item)
+            this.atribuirValorSemResposta(item)
           }
         })
     })
@@ -60,6 +60,7 @@ export class InputBuscaComponent {
     let preco = resFork[2][0].preco;
 
     item.mostrarItem = true
+    item.promocao = detalhe.promocao
     item.ean = detalhe.ean
     item.origemDesconto = detalhe.origemDesconto
     item.nomenclatura = detalhe.nomenclatura
@@ -69,14 +70,15 @@ export class InputBuscaComponent {
     item.situacaoItem = detalhe.situacaoItem
     item.advertencias = detalhe.advertencias
     item.categorias = detalhe.categorias
+    item.precoDe = detalhe.precoDe
     item.estoqueLoja = estoque.estoqueLoja
     item.precoPor = preco.precoPor
-    item.precoDe = preco.precoDe
     item.precoVenda = preco.precoVenda
+    
     return item
   }
 
-  atribuirValoresSemResposta(item) {
+  atribuirValorSemResposta(item) {
     item.mostrarItem = false
     return item
   }

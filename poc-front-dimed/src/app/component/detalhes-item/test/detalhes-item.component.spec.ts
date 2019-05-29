@@ -1,14 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DetalhesItemComponent } from '../detalhes-item.component';
+import { DetalheItemModule } from '../detalhe-item.module';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-describe('DetalhesItemComponent', () => {
+fdescribe('DetalhesItemComponent', () => {
   let component: DetalhesItemComponent;
   let fixture: ComponentFixture<DetalhesItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetalhesItemComponent ]
+      declarations: [ DetalheItemModule ],
+      providers: [ NgbActiveModal ]
     })
     .compileComponents();
   }));

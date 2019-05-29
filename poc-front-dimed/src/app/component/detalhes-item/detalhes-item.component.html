@@ -1,44 +1,34 @@
 
-<button type="button" class="btn btn-outline-primary" (click)="openModel(modal)">Detalhe</button>
-
-<ng-template #modal let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+<div class="modal-header">
+    <h4 class="modal-title">{{ itemFinal.nomenclatura }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <p>Hello, World!</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
-    </div>
-</ng-template>
-
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ExemploModalCentralizado">
-  Abrir modal de demonstração
-</button>
-
-<div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="TituloModalCentralizado">Título do modal</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Salvar mudanças</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- <div>{{ itemFinal.origemDesconto }}</div>
-<div *ngFor="let categoria of itemFinal.categorias">Categorias: {{ categoria.descricao }}</div> -->
+    </button>
+</div>
+<div class="modal-body">
+    <p *ngIf="itemFinal.promocao" >Promocao: {{ itemFinal.promocao.percentualDesconto }}%</p>
+    <h5>Preco: </h5>
+    <p>De: <s>{{ itemFinal.precoDe | currency:'R$' }}</s> | Por: {{ itemFinal.precoPor | currency:'R$'}}</p>
+    <h5>Nomeclatura detalhada: </h5>
+    <p>{{ itemFinal.nomenclaturaDetalhada }}</p>
+    <ng-container *ngIf="itemFinal.principioAtivo">
+        <h5>Princípio ativo:</h5>
+        <p>{{ itemFinal.principioAtivo }}</p>
+        <h5>Classe terapeutica:</h5>
+       <p>{{ itemFinal.classeTerapeutica }}</p>
+    </ng-container>
+        <h5>Situação do item: {{ itemFinal.situacaoItem }}</h5>
+    <ng-container>
+        <h5 *ngIf="itemFinal.advertencias[0]">Advertencias:</h5>
+        <div *ngFor="let advertencia of itemFinal.advertencias">{{ advertencia }}</div>
+    </ng-container>
+    <ng-container>
+        <h5>Categorias:</h5>
+        <ol>
+            <li *ngFor="let categoria of itemFinal.categorias">{{ categoria.descricao }}</li>
+        </ol>
+    </ng-container>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
