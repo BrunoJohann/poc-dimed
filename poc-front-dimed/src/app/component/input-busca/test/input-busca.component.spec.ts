@@ -16,9 +16,9 @@ fdescribe('InputBuscaComponent', () => {
   let fixture: ComponentFixture<InputBuscaComponent>;
 
   let buscaService: BuscaInicialService;
-  let buscaDetalheService: BuscaDetalhesService;
-  let buscaEstoqueService: BuscaEstoqueService;
-  let buscaPrecoService: BuscaPrecoService;
+  let detalheService: BuscaDetalhesService;
+  let estoqueService: BuscaEstoqueService;
+  let precoService: BuscaPrecoService;
   let httpClient: HttpClient;
 
   beforeEach(async(() => {
@@ -38,9 +38,9 @@ fdescribe('InputBuscaComponent', () => {
     .then(() => {
       httpClient = TestBed.get(HttpClient);
       buscaService = TestBed.get(BuscaInicialService); 
-      buscaDetalheService = TestBed.get(BuscaDetalhesService);
-      buscaEstoqueService = TestBed.get(BuscaEstoqueService);
-      buscaPrecoService = TestBed.get(BuscaPrecoService);
+      detalheService = TestBed.get(BuscaDetalhesService);
+      estoqueService = TestBed.get(BuscaEstoqueService);
+      precoService = TestBed.get(BuscaPrecoService);
 
       fixture = TestBed.createComponent(InputBuscaComponent);
       component = fixture.componentInstance;
@@ -53,4 +53,30 @@ fdescribe('InputBuscaComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('Dado que [getForkJoin] tenha sido chamada>>>>', () => {
+    beforeEach(() => {
+      spyOn(detalheService, 'getDetalhe').and.returnValue(stub.mockProdutoDetalhe());
+      spyOn(estoqueService, 'getEstoque').and.returnValue(stub.mockEstoque());
+      spyOn(precoService, 'getPreco').and.returnValue(stub.mockPrecos())
+      
+      console.log('Retorno',component.getForkJoin(123));
+      console.log('stub', stub.mockProdutoDetalhe());
+      
+      
+    });
+
+    it('', () => {
+      // expect(component.getForkJoin(123)[0]).toEqual(stub.mockProdutoDetalhe())
+    })
+
+    it('', () => {
+
+    })
+
+    it('', () => {
+
+    })
+  });
+  
 });

@@ -18,8 +18,8 @@ export class BuscaEstoqueService {
     return this.http.get<Estoque>(this.urlEstoque(codigo));
   }
 
-  getArrayEstoque(listaItens: ItemFinal[]) {
-    return this.http.get<Estoque>(this.urlEstoque(''));
-  }
+  // getArrayEstoque(listaItens: ItemFinal[]) {
+  //   return this.http.get<Estoque>(this.urlEstoque(''));
+  // }
 
 }

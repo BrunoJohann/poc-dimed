@@ -18,8 +18,8 @@ export class BuscaPrecoService {
     return this.http.get<Precos>(this.urlPreco(codigo));
   }
 
-  getPrecos(listaItens: ItemFinal[]) {
-    return this.http.get<Precos>(this.urlPreco(''));
-  }
+  // getPrecos(listaItens: ItemFinal[]) {
+  //   return this.http.get<Precos>(this.urlPreco(''));
+  // }
 
 }
