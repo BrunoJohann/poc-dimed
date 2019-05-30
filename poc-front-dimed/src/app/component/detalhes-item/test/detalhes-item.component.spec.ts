@@ -18,7 +18,7 @@ xdescribe('DetalhesItemComponent', () => {
         DetalheItemModule
       ],
       providers: [ 
-        { provider: NgbActiveModal },
+        NgbActiveModal
       ]
     })
     .compileComponents()
@@ -39,6 +39,8 @@ xdescribe('DetalhesItemComponent', () => {
     beforeEach(() => {
       component.setItemFinal(stub.mockItemFinal());
     });
+    // console.log(stub.mockItemFinal());
+    
     it('Deve salvar o objeto', () => {
       expect(component.itemFinal).toEqual(stub.mockItemFinal());
     });

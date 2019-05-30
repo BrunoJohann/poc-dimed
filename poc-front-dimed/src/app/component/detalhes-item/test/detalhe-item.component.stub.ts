@@ -1,9 +1,10 @@
 import { Builder } from 'builder-pattern';
 import { ItemFinal } from 'src/app/model/ItemFinal.model';
+import { Promocao } from 'src/app/model/Promocao.model';
 
 export class DetalhePackComponentStub {
 
-    public static mockItemFinal() {
+    public static mockItemFinal(): ItemFinal {
         return Builder<ItemFinal>()
                 .nomeDetalhado('RITTER CEREAL BROWNIE CHOCO 25G AV')
                 .codigoItem(12)
@@ -22,8 +23,18 @@ export class DetalhePackComponentStub {
                 .advertencias(null)
                 .categorias(null)
                 .mostrarItem(null)
-                .promocao(null)
+                .promocao(this.mockPromocao())
                 .build()
     }
+
+    public static mockPromocao(): Promocao {
+        return Builder<Promocao>()
+                .codigoFilialPromotora(1)
+                .codigoPromocao(1)
+                .percentualDesconto(1)
+                .build()
+    }
+
+    public setItemFinal() { }
 
 }

@@ -9,7 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class DetalhesItemComponent implements OnInit {
 
-  @Input() itemFinal: ItemFinal
+  itemFinal: ItemFinal
 
   constructor( public activeModal: NgbActiveModal ) {
   }
@@ -18,8 +18,6 @@ export class DetalhesItemComponent implements OnInit {
   }
 
   setItemFinal(item: ItemFinal) {
-    console.log(item);
-    
     this.itemFinal = item;
   }
 

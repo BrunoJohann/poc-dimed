@@ -20,6 +20,6 @@ export class ItemFinal {
         public advertencias?: Array<string>,
         public categorias?: Categoria[],
         public mostrarItem?: boolean,
-        public promocao?: Promocao,
+        public promocao?: Promocao
     ) {}
 }

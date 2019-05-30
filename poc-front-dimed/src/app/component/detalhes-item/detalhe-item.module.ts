@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DetalhesItemComponent } from './detalhes-item.component';
 import { ResultadoBuscaComponent } from '../resultado-busca/resultado-busca.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,9 @@ import { ResultadoBuscaComponent } from '../resultado-busca/resultado-busca.comp
   ],
   exports:[
     DetalhesItemComponent
+  ],
+  providers:[
+    NgbActiveModal
   ]
 })
 export class DetalheItemModule { }
