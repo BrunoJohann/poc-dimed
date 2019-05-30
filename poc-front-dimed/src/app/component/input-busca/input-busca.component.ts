@@ -30,7 +30,7 @@ export class InputBuscaComponent {
     public buscaPrecoService: BuscaPrecoService ) { }
 
   buscaProduto(event: string) {
-  this.buscaService.getProduto(event)
+    this.buscaService.getProduto(event)
           .pipe(retry(3))
           .subscribe({
             next: listaItens => {

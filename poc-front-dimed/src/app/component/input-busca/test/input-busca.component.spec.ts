@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { InputBuscaComponent } from '../input-busca.component';
 import { InputBuscaModule } from '../input-busca.module';
 
-import { InputBuscaComponentStub as stub} from './input-busca.component.stub'
+import { InputBuscaComponentStub as stub} from './input-busca.component.stub';
 
 import { BuscaInicialService } from 'src/app/services/busca/busca-inicial.service';
 import { BuscaDetalhesService } from 'src/app/services/busca-detalhes/busca-detalhes.service';
@@ -23,15 +23,15 @@ fdescribe('InputBuscaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ 
-        InputBuscaModule, 
+      imports: [
+        InputBuscaModule,
       ],
       providers: [
-        HttpClient,
-        { provide: buscaService, useClass: stub },
-        { provide: buscaDetalheService, useClass: stub },
-        { provide: buscaEstoqueService, useClass: stub },
-        { provide: buscaPrecoService, useClass: stub }
+        { provide: HttpClient, useClass: stub },
+        { provide: BuscaInicialService, useClass: stub },
+        { provide: BuscaDetalhesService, useClass: stub },
+        { provide: BuscaEstoqueService, useClass: stub },
+        { provide: BuscaPrecoService, useClass: stub }
       ]
     })
     .compileComponents()
@@ -41,12 +41,12 @@ fdescribe('InputBuscaComponent', () => {
       buscaDetalheService = TestBed.get(BuscaDetalhesService);
       buscaEstoqueService = TestBed.get(BuscaEstoqueService);
       buscaPrecoService = TestBed.get(BuscaPrecoService);
-      
+
       fixture = TestBed.createComponent(InputBuscaComponent);
       component = fixture.componentInstance;
 
       fixture.detectChanges();
-    })
+    });
   }));
 
 
