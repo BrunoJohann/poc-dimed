@@ -10,6 +10,7 @@ import { BuscaDetalhesService } from 'src/app/services/busca-detalhes/busca-deta
 import { BuscaPrecoService } from 'src/app/services/busca-preco/busca-preco.service';
 import { BuscaEstoqueService } from 'src/app/services/busca-estoque/busca-estoque.service';
 import { HttpClient } from 'selenium-webdriver/http';
+import { of } from 'rxjs';
 
 fdescribe('InputBuscaComponent', () => {
   let component: InputBuscaComponent;
@@ -54,28 +55,27 @@ fdescribe('InputBuscaComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Dado que [getForkJoin] tenha sido chamada>>>>', () => {
+  describe('Dado que [getForkJoin] tenha sido chamada>>>>', () => {    
+    let detalhe, estoque, busca;
     beforeEach(() => {
-      spyOn(detalheService, 'getDetalhe').and.returnValue(stub.mockProdutoDetalhe());
-      spyOn(estoqueService, 'getEstoque').and.returnValue(stub.mockEstoque());
-      spyOn(precoService, 'getPreco').and.returnValue(stub.mockPrecos())
-      
-      console.log('Retorno',component.getForkJoin(123));
-      console.log('stub', stub.mockProdutoDetalhe());
-      
-      
+      spyOn(detalheService, 'getDetalhe').and.returnValue( of(stub.mockProdutoDetalhe()) );
+      spyOn(estoqueService, 'getEstoque').and.returnValue( of(stub.mockEstoque()) );
+      spyOn(precoService, 'getPreco').and.returnValue( of(stub.mockPrecos()) )
+      component.getForkJoin(123).subscribe( res => { 
+        [ detalhe, estoque, busca ] = res
+      });
     });
 
-    it('', () => {
-      // expect(component.getForkJoin(123)[0]).toEqual(stub.mockProdutoDetalhe())
+    it('Deve retornar o ProdutoDetalhe na primeira posição', () => {
+      expect(detalhe).toEqual(stub.mockProdutoDetalhe())
     })
 
-    it('', () => {
-
+    it('Deve retornar o Estoque na segunda posição', () => {
+      expect(estoque).toEqual(stub.mockEstoque())
     })
 
-    it('', () => {
-
+    it('Deve retornar os Precos na terceira posição', () => {
+      expect(busca).toEqual(stub.mockPrecos())
     })
   });
   
