@@ -11,6 +11,7 @@ import { BuscaPrecoService } from 'src/app/services/busca-preco/busca-preco.serv
 import { BuscaEstoqueService } from 'src/app/services/busca-estoque/busca-estoque.service';
 import { HttpClient } from 'selenium-webdriver/http';
 import { of } from 'rxjs';
+import { ItemFinal } from 'src/app/model/ItemFinal.model';
 
 fdescribe('InputBuscaComponent', () => {
   let component: InputBuscaComponent;
@@ -55,6 +56,73 @@ fdescribe('InputBuscaComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('Dado que [buscaProduto] tenha sido chamada>>>>', () => {
+    beforeEach(() => {
+      spyOn(buscaService, 'getProduto').and.returnValue( of(stub.mockProduto()) );
+      spyOn(component, 'postDetalhe')
+      component.buscaProduto('')
+    });
+
+    it('Então deve chamar a função [postDetalhe]', () => {
+      expect(component.postDetalhe).toHaveBeenCalled();
+    });
+  });
+
+  describe('Dado que [postDetalhe] tenha sido chamada>>>>', () => {
+    describe('E o detalhe do item não seja undefined', () => {
+      beforeEach(() => {
+        spyOn(component, 'getForkJoin').and.returnValue( of([stub.mockProdutoDetalhe(), stub.mockEstoque(), stub.mockPrecos()]) );
+        spyOn(component, 'atribuirValores')
+        component.postDetalhe( stub.mockItemFinalArray() );
+      });
+
+      it('Então [atribuirValores] deve ser chamada', () => {
+        expect(component.atribuirValores).toHaveBeenCalled();
+      });
+    });
+
+    describe('E o detalhe do item seja undefined', () => {
+      beforeEach(() => {
+        spyOn(component, 'getForkJoin').and.returnValue( of([stub.mockProdutoDetalheVazio(), stub.mockEstoque(), stub.mockPrecos()]) );
+        spyOn(component, 'atribuirValorSemResposta')
+        component.postDetalhe( stub.mockItemFinalArray() );
+      });
+
+      it('Então [atribuirValorSemResposta] deve ser chamada', () => {
+        expect(component.atribuirValorSemResposta).toHaveBeenCalled();
+      });
+    });
+  });
+
+  xdescribe('Dado que [atribuirValores] seja chamada >>>', () => {
+    let itemResposta: ItemFinal
+    beforeEach(() => {
+      itemResposta = component.atribuirValores( stub.mockItemFinal(), [stub.mockProdutoDetalheVazio(), stub.mockEstoque(), stub.mockPrecos()] );
+    });
+
+    it('', () => {
+      console.log('precos', stub.mockPrecos());
+      
+      console.log("Mock", stub.mockItemFinalAtribuidoValores());
+      console.log('res', itemResposta);
+      
+      
+      expect(itemResposta).toEqual(stub.mockItemFinalAtribuidoValores());
+    });
+  });
+
+
+  describe('Dado que [atribuirValorSemResposta] seja chamada >>>', () => {
+    let item: ItemFinal
+    beforeEach(() => {
+      item = component.atribuirValorSemResposta( stub.mockItemFinal() )
+    });
+
+    it('Então o item deve receber o valor "mostrarItem = false"', () => {
+      expect(item.mostrarItem).toBeFalsy();
+    });
+  });
+
   describe('Dado que [getForkJoin] tenha sido chamada>>>>', () => {    
     let detalhe, estoque, busca;
     beforeEach(() => {
@@ -66,15 +134,15 @@ fdescribe('InputBuscaComponent', () => {
       });
     });
 
-    it('Deve retornar o ProdutoDetalhe na primeira posição', () => {
+    it('Então deve retornar o ProdutoDetalhe na primeira posição', () => {
       expect(detalhe).toEqual(stub.mockProdutoDetalhe())
     })
 
-    it('Deve retornar o Estoque na segunda posição', () => {
+    it('Então deve retornar o Estoque na segunda posição', () => {
       expect(estoque).toEqual(stub.mockEstoque())
     })
 
-    it('Deve retornar os Precos na terceira posição', () => {
+    it('Então deve retornar os Precos na terceira posição', () => {
       expect(busca).toEqual(stub.mockPrecos())
     })
   });

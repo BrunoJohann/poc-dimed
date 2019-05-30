@@ -15,6 +15,6 @@ export class ItemDetalhe {
         public situacaoItem?: string,
         public advertencias?: Array<string>,
         public categorias?: Categoria[],
-        public promocao?: Promocao
+        public promocao?: Promocao,
     ) {}
 }
