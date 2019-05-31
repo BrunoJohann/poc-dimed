@@ -84,7 +84,7 @@ export class InputBuscaComponentStub {
         return Builder<ItemFinal>()
                 .nomeDetalhado('PARAC+CAF 500/65MG 20CP REV EMS GEN C')
                 .codigoItem(5656)
-                .estoqueLoja(-5)
+                .estoqueLoja(2)
                 .precoPor(2.9)
                 .precoDe(2.9)
                 .precoVenda(2.9)
@@ -129,8 +129,8 @@ export class InputBuscaComponentStub {
                 .precoDe(2.9)
                 .ean(654321)
                 .origemDesconto('PROMOCAO')
-                .nomenclatura(null)
-                .nomenclaturaDetalhada(null)
+                .nomenclatura("PARAC+CAF 500/65MG 20CP REV EMS GEN C")
+                .nomenclaturaDetalhada("PARAC+CAF 500/65MG 20CP REV EMS GEN C")
                 .principioAtivo(null)
                 .classeTerapeutica(null)
                 .situacaoItem(null)
@@ -140,21 +140,20 @@ export class InputBuscaComponentStub {
                 .build()
     }
 
-    public static mockEstoque(): Estoque {
-        return Builder<Estoque>()
+    public static mockEstoque(): Estoque[] {
+        return [Builder<Estoque>()
                 .codigoItem(123)
                 .filial(101)
                 .estoqueLoja(2)
-                .build()
+                .build()]
     }
 
     public static mockPrecos(): Precos[] {
-        return [
-                Builder<Precos>()
+        return [Builder<Precos>()
                 .codigoItem(123)
                 .preco(this.mockPreco())
-                .build()
-            ]
+                .build()]
+            
     }
 
     public static mockPreco(): Preco {

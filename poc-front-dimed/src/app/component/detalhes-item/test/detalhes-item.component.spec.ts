@@ -6,7 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { DetalhePackComponentStub as stub } from './detalhe-item.component.stub'
 
-xdescribe('DetalhesItemComponent', () => {
+describe('DetalhesItemComponent', () => {
   let component: DetalhesItemComponent;
   let fixture: ComponentFixture<DetalhesItemComponent>;
 
@@ -23,26 +23,25 @@ xdescribe('DetalhesItemComponent', () => {
     })
     .compileComponents()
     .then(() => {
+      
       activeModal = TestBed.get(NgbActiveModal)
-
       fixture = TestBed.createComponent(DetalhesItemComponent);
       component = fixture.componentInstance;
-      fixture.detectChanges();
     })
   }));
 
-  // it('should create', () => {
-  //   expect(component).toBeDefined();
-  // });
-  
-  describe('quando função [setItemFinal] for chamada >>>>', () => {
+  it('should create', () => {
+    expect(component).toBeDefined();
+  });
+
+  describe('', () => {
     beforeEach(() => {
-      component.setItemFinal(stub.mockItemFinal());
+      component.setItemFinal( stub.mockItemFinal() );
     });
-    // console.log(stub.mockItemFinal());
-    
-    it('Deve salvar o objeto', () => {
-      expect(component.itemFinal).toEqual(stub.mockItemFinal());
+
+    it('', () => {
+      expect(component.itemFinal).toEqual( stub.mockItemFinal() );
     });
   });
+
 });

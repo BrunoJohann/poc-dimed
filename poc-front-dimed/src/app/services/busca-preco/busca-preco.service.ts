@@ -10,16 +10,8 @@ export class BuscaPrecoService {
 
   constructor( private http: HttpClient ) { }
 
-  urlPreco(codigo) {
-    return `http://api-int.grupodimedservices.com.br/tst/mostruario/v3/itens/precos?item=${codigo}&filial=101&perfil=1`
-  }
-
   getPreco(codigo) {
-    return this.http.get<Precos>(this.urlPreco(codigo));
+    return this.http.get<Precos>(`http://api-int.grupodimedservices.com.br/tst/mostruario/v3/itens/precos?item=${codigo}&filial=101&perfil=1`);
   }
-
-  // getPrecos(listaItens: ItemFinal[]) {
-  //   return this.http.get<Precos>(this.urlPreco(''));
-  // }
 
 }

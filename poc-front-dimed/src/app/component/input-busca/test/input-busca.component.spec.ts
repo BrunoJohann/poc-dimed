@@ -14,7 +14,7 @@ import { BuscaEstoqueService } from 'src/app/services/busca-estoque/busca-estoqu
 import { HttpClient } from 'selenium-webdriver/http';
 import { ItemFinal } from 'src/app/model/ItemFinal.model';
 
-fdescribe('InputBuscaComponent', () => {
+describe('InputBuscaComponent', () => {
   let component: InputBuscaComponent;
   let fixture: ComponentFixture<InputBuscaComponent>;
 
@@ -92,32 +92,30 @@ fdescribe('InputBuscaComponent', () => {
     });
   });
 
-  xdescribe('Dado que [atribuirValores] seja chamada >>>', () => {
+  describe('Dado que [atribuirValores] seja chamada >>>', () => {
     let itemResposta: ItemFinal
     beforeEach(() => {
-      // itemResposta = component.atribuirValores( stub.mockItemFinal(), [stub.mockProdutoDetalheVazio(), stub.mockEstoque(), stub.mockPrecos()] );
+      itemResposta = component.atribuirValores( stub.mockItemFinal(), [stub.mockProdutoDetalhe(), stub.mockEstoque(), stub.mockPrecos()] );
     });
 
-    it('', () => {
-      console.log('precos', stub.mockPrecos());
-      
-      console.log("Mock", stub.mockItemFinalAtribuidoValores());
-      console.log('res', itemResposta);
-      
-      
+    it('Então deve retornar o item com os dados atribuidos', () => {
       expect(itemResposta).toEqual(stub.mockItemFinalAtribuidoValores());
+    });
+
+    it('Então o item deve receber o valor "mostrarItem = true"', () => {
+      expect(itemResposta.mostrarItem).toBeTruthy();
     });
   });
 
 
   describe('Dado que [atribuirValorSemResposta] seja chamada >>>', () => {
-    let item: ItemFinal
+    let itemResposta: ItemFinal
     beforeEach(() => {
-      item = component.atribuirValorSemResposta( stub.mockItemFinal() )
+      itemResposta = component.atribuirValorSemResposta( stub.mockItemFinal() )
     });
 
     it('Então o item deve receber o valor "mostrarItem = false"', () => {
-      expect(item.mostrarItem).toBeFalsy();
+      expect(itemResposta.mostrarItem).toBeFalsy();
     });
   });
 

@@ -10,16 +10,8 @@ export class BuscaEstoqueService {
 
   constructor( private http: HttpClient ) { }
 
-  urlEstoque(codigo) {
-    return `http://api-int.grupodimedservices.com.br/tst/filial/v1/filiais/101/estoque?itens=${codigo}`
-  }
-
   getEstoque(codigo) {
-    return this.http.get<Estoque>(this.urlEstoque(codigo));
+    return this.http.get<Estoque>(`http://api-int.grupodimedservices.com.br/tst/filial/v1/filiais/101/estoque?itens=${codigo}`);
   }
-
-  // getArrayEstoque(listaItens: ItemFinal[]) {
-  //   return this.http.get<Estoque>(this.urlEstoque(''));
-  // }
 
 }

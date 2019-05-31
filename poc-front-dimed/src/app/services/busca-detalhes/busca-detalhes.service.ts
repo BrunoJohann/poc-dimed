@@ -12,13 +12,9 @@ export class BuscaDetalhesService {
 
   constructor( private http: HttpClient ) { }
 
-  urlDetalhes() {
-    return 'http://api-int.grupodimedservices.com.br/tst/mostruario/v3/itens/detalhe';
-  }
-
   getDetalhe(codigo: number){
     ItemDetalhePost.itens[0].codigo = codigo;
-    return this.http.post<ProdutoDetalhe>(this.urlDetalhes(), ItemDetalhePost)
+    return this.http.post<ProdutoDetalhe>('http://api-int.grupodimedservices.com.br/tst/mostruario/v3/itens/detalhe', ItemDetalhePost)
   }
 
   // getDetalhes(listaItens: ItemFinal[]){

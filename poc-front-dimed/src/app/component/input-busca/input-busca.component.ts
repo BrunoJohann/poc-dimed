@@ -54,12 +54,10 @@ export class InputBuscaComponent {
     this.enviaComponentePai(listaItens)
   }
 
-  atribuirValores(item: ItemFinal, resFork: [ProdutoDetalhe, Estoque, Precos]) {
+  atribuirValores( item: ItemFinal, resFork ) {
     let detalhe = resFork[0].itens[0];
     let estoque = resFork[1][0];
     let preco = resFork[2][0].preco;
-    console.log(resFork[2]);
-    
 
     item.mostrarItem = true
     item.promocao = detalhe.promocao
