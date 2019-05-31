@@ -32,7 +32,7 @@ xdescribe('DetalhesItemComponent', () => {
   }));
 
   // it('should create', () => {
-  //   expect(component).toBeTruthy();
+  //   expect(component).toBeDefined();
   // });
   
   describe('quando função [setItemFinal] for chamada >>>>', () => {

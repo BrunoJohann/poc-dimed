@@ -7,14 +7,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './detalhes-item.component.html',
   styleUrls: ['./detalhes-item.component.css']
 })
-export class DetalhesItemComponent implements OnInit {
+export class DetalhesItemComponent {
 
   itemFinal: ItemFinal
 
   constructor( public activeModal: NgbActiveModal ) {
-  }
-
-  ngOnInit() {
   }
 
   setItemFinal(item: ItemFinal) {

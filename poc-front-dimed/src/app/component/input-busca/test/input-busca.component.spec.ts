@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { of } from 'rxjs';
+
 import { InputBuscaComponent } from '../input-busca.component';
 import { InputBuscaModule } from '../input-busca.module';
 
@@ -10,7 +12,6 @@ import { BuscaDetalhesService } from 'src/app/services/busca-detalhes/busca-deta
 import { BuscaPrecoService } from 'src/app/services/busca-preco/busca-preco.service';
 import { BuscaEstoqueService } from 'src/app/services/busca-estoque/busca-estoque.service';
 import { HttpClient } from 'selenium-webdriver/http';
-import { of } from 'rxjs';
 import { ItemFinal } from 'src/app/model/ItemFinal.model';
 
 fdescribe('InputBuscaComponent', () => {
@@ -21,7 +22,6 @@ fdescribe('InputBuscaComponent', () => {
   let detalheService: BuscaDetalhesService;
   let estoqueService: BuscaEstoqueService;
   let precoService: BuscaPrecoService;
-  let httpClient: HttpClient;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,7 +29,6 @@ fdescribe('InputBuscaComponent', () => {
         InputBuscaModule,
       ],
       providers: [
-        { provide: HttpClient, useClass: stub },
         { provide: BuscaInicialService, useClass: stub },
         { provide: BuscaDetalhesService, useClass: stub },
         { provide: BuscaEstoqueService, useClass: stub },
@@ -38,7 +37,6 @@ fdescribe('InputBuscaComponent', () => {
     })
     .compileComponents()
     .then(() => {
-      httpClient = TestBed.get(HttpClient);
       buscaService = TestBed.get(BuscaInicialService); 
       detalheService = TestBed.get(BuscaDetalhesService);
       estoqueService = TestBed.get(BuscaEstoqueService);
@@ -97,7 +95,7 @@ fdescribe('InputBuscaComponent', () => {
   xdescribe('Dado que [atribuirValores] seja chamada >>>', () => {
     let itemResposta: ItemFinal
     beforeEach(() => {
-      itemResposta = component.atribuirValores( stub.mockItemFinal(), [stub.mockProdutoDetalheVazio(), stub.mockEstoque(), stub.mockPrecos()] );
+      // itemResposta = component.atribuirValores( stub.mockItemFinal(), [stub.mockProdutoDetalheVazio(), stub.mockEstoque(), stub.mockPrecos()] );
     });
 
     it('', () => {

@@ -174,11 +174,6 @@ export class InputBuscaComponentStub {
                 .build()
     }
 
-    public postDetalhe() { }
-    public getForkJoin() { }
-    public atribuirValores() { }
-    public atribuirValorSemResposta() { }
-
     public getDetalhe() { }
     public getEstoque() { }
     public getPreco() { }

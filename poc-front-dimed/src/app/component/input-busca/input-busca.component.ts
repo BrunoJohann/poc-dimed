@@ -58,6 +58,8 @@ export class InputBuscaComponent {
     let detalhe = resFork[0].itens[0];
     let estoque = resFork[1][0];
     let preco = resFork[2][0].preco;
+    console.log(resFork[2]);
+    
 
     item.mostrarItem = true
     item.promocao = detalhe.promocao
