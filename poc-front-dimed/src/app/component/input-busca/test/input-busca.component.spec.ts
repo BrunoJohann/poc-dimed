@@ -80,16 +80,32 @@ describe('InputBuscaComponent', () => {
     });
   });
 
-  describe('Dado que [postDetalhe] tenha sido chamada>>>>', () => {
+  describe('Dado que [postDetalhe] tenha sido chamada >>>>', () => {
     describe('E o detalhe do item não seja undefined', () => {
       beforeEach(() => {
         spyOn(component, 'getForkJoin').and.returnValue( of([stub.mockProdutoDetalhe(), stub.mockEstoque(), stub.mockPrecos()]) );
         spyOn(component, 'atribuirValores')
+        spyOn(component, 'enviaComponentePai')
         component.postDetalhe( stub.mockItemFinalArray() );
       });
 
       it('Então [atribuirValores] deve ser chamada', () => {
         expect(component.atribuirValores).toHaveBeenCalled();
+      });
+
+      it('Então [enviaComponentePai] deve ser chamada', () => {
+        expect(component.enviaComponentePai).toHaveBeenCalledWith(stub.mockItemFinalArray())
+      });
+    });
+
+    describe('Dado que [enviaComponentePai] tenha sido chamada com uma lista>>>>', () => {
+      beforeEach(() => {
+        spyOn(component.resBuscaApi, 'emit');
+        component.enviaComponentePai( stub.mockItemFinalArray() );
+      });
+
+      it('Então [emit] deve ser chamada com a mesma lista', () => {
+        expect(component.resBuscaApi.emit).toHaveBeenCalledWith(stub.mockItemFinalArray());
       });
     });
 
