@@ -7,7 +7,6 @@ import { DetalhesItemComponent } from '../detalhes-item/detalhes-item.component'
   selector: 'app-resultado-busca',
   templateUrl: './resultado-busca.component.html',
   styleUrls: ['./resultado-busca.component.css'],
-  // providers: [ NgbModal ]
 })
 export class ResultadoBuscaComponent {
 

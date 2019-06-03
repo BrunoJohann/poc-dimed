@@ -9,7 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class DetalhesItemComponent {
 
-  itemFinal: ItemFinal
+  itemFinal: ItemFinal;
 
   constructor( public activeModal: NgbActiveModal ) {
   }

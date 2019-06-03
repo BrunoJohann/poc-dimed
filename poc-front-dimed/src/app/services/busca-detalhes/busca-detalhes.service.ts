@@ -15,17 +15,5 @@ export class BuscaDetalhesService {
     ItemDetalhePost.itens[0].codigo = codigo;
     return this.http.post<ProdutoDetalhe>('http://api-int.grupodimedservices.com.br/tst/mostruario/v3/itens/detalhe', ItemDetalhePost)
   }
-
-  // getDetalhes(listaItens: ItemFinal[]){
-  //   let codigos = []
-  //   let postDetalhes: ItemDetalhePostModel
-    
-  //   for(let item of listaItens){ 
-  //     postDetalhes.itens[0].codigo = item.codigoItem
-  //     codigos.push(postDetalhes.itens[0].codigo) 
-  //   }
-  //   console.log(codigos);
-  //   return this.http.post<ProdutoDetalhe[]>(this.urlDetalhes(), codigos)
-  // }
   
 }

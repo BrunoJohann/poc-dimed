@@ -14,7 +14,6 @@ export class PrimeiraTelaComponent {
 
   resInputFilho(event) {
     this.listaDeItens = event
-    // console.log("pai: ", this.listaDeItens)
   }
 
 }

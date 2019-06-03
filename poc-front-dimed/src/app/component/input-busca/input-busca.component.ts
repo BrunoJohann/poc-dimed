@@ -1,11 +1,8 @@
 import { Component, Output, EventEmitter, OnChanges } from '@angular/core';
-import { forkJoin, of, Observable } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { retry } from 'rxjs/operators';
 
 import { ItemFinal } from 'src/app/model/ItemFinal.model';
-import { ProdutoDetalhe } from 'src/app/model/EstruturaPost/ProdutoDetalhe.model';
-import { Estoque } from 'src/app/model/Estoque.model';
-import { Precos } from 'src/app/model/EstruturaPreco/Precos.model';
 
 import { BuscaInicialService } from 'src/app/services/busca/busca-inicial.service';
 import { BuscaDetalhesService } from 'src/app/services/busca-detalhes/busca-detalhes.service';
