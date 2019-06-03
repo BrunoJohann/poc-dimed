@@ -20,7 +20,7 @@ describe('BuscaInicialService', () => {
   });
 
   it('Deve ser criada', () => {
-    expect(service).toBeTruthy();
+    expect(service).toBeDefined();
   });
   
   describe('Quando [getProduto] >>>>', () => {

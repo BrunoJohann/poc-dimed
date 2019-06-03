@@ -19,8 +19,8 @@ describe('BuscaPrecoService', () => {
     httpClient = testBed.get(HttpClient);
   });
 
-  it('should be created', () => {
-    expect(precoService).toBeTruthy();
+  it('Deve ser criada', () => {
+    expect(precoService).toBeDefined();
   });
 
   describe('Quando [getPreco] >>>>', () => {

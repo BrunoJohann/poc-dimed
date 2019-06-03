@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+
 import { ItemDetalhePost } from 'src/app/model/EstruturaPost/ItemDetalhePost';
 import { ProdutoDetalhe } from 'src/app/model/EstruturaPost/ProdutoDetalhe.model';
-import { ItemFinal } from 'src/app/model/ItemFinal.model';
-import { ItemDetalhePostModel } from 'src/app/model/EstruturaPost/ItemDetalhePost.model';
 
 @Injectable({
   providedIn: 'root'

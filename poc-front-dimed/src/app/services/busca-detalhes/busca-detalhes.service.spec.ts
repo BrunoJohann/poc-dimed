@@ -21,7 +21,7 @@ describe('BuscaDetalhesService', () => {
   });
 
   it('Deve ser criada', () => {
-    expect(serviceDetalhe).toBeTruthy();
+    expect(serviceDetalhe).toBeDefined();
   });
 
   describe('Quando [getDetalhe] for chamada >>>>', () => {

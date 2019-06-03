@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 import { InputBuscaComponent } from '../input-busca.component';
 import { InputBuscaModule } from '../input-busca.module';
@@ -50,19 +50,33 @@ describe('InputBuscaComponent', () => {
   }));
 
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('Component deve ser iniciado', () => {
+    expect(component).toBeDefined();
   });
 
   describe('Dado que [buscaProduto] tenha sido chamada>>>>', () => {
-    beforeEach(() => {
-      spyOn(buscaService, 'getProduto').and.returnValue( of(stub.mockProduto()) );
-      spyOn(component, 'postDetalhe')
-      component.buscaProduto('')
+    describe('E [getProduto] retorno um valor válido', () => {
+      beforeEach(() => {
+        spyOn(buscaService, 'getProduto').and.returnValue( of(stub.mockProduto()) );
+        spyOn(component, 'postDetalhe')
+        component.buscaProduto('')
+      });
+  
+      it('Então deve chamar a função [postDetalhe]', () => {
+        expect(component.postDetalhe).toHaveBeenCalled();
+      });
     });
 
-    it('Então deve chamar a função [postDetalhe]', () => {
-      expect(component.postDetalhe).toHaveBeenCalled();
+    describe('E [getProduto] retorno um valor inválido', () => {
+      beforeEach(() => {
+        spyOn(buscaService, 'getProduto').and.returnValue( throwError('') );
+        spyOn(console, 'error');
+        component.buscaProduto('');
+      });
+  
+      it('Então deve aparecer um mensagem de erro no console com valor "Houve um erro na pesquisa"', () => {
+        expect(console.error).toHaveBeenCalledWith('Houve um erro na pesquisa');
+      });
     });
   });
 

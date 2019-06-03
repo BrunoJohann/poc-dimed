@@ -34,8 +34,8 @@ describe('PrimeiraTelaComponent', () => {
     });
   }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('Component deve ser iniciado', () => {
+    expect(component).toBeDefined();
   });
 
   describe('Dado que [resInputFilho] tenha sido chamada passando um array de "ItemFinal" >>>>', () => {

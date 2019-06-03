@@ -19,8 +19,8 @@ describe('BuscaEstoqueService', () => {
     httpClient = testBed.get(HttpClient);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('Deve ser criada', () => {
+    expect(service).toBeDefined();
   });
 
   describe('Quando [getEstoque] >>>>', () => {

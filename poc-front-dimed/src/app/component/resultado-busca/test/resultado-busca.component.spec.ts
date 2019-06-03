@@ -28,20 +28,22 @@ describe('ResultadoBuscaComponent', () => {
   }));
 
   beforeEach(() => {
-    fixtureDetalhes = TestBed.createComponent(DetalhesItemComponent)
-    detalhesItemComponent = fixtureDetalhes.componentInstance;
+    // fixtureDetalhes = TestBed.createComponent(DetalhesItemComponent)
+    // detalhesItemComponent = fixtureDetalhes.componentInstance;
     modal = TestBed.get(NgbModal);
     fixture = TestBed.createComponent(ResultadoBuscaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('Component deve ser iniciado', () => {
+    expect(component).toBeDefined();
   });
 
   describe('Dado que [buscaProduto] tenha sido chamada>>>>', () => {
     beforeEach(() => {
+      fixtureDetalhes = TestBed.createComponent(DetalhesItemComponent)
+      detalhesItemComponent = fixtureDetalhes.componentInstance;
       spyOn(modal, 'open').and.callFake(() => { 
         return fixtureDetalhes
       }) 

@@ -30,16 +30,16 @@ describe('DetalhesItemComponent', () => {
     })
   }));
 
-  it('should create', () => {
+  it('Component deve ser iniciado', () => {
     expect(component).toBeDefined();
   });
 
-  describe('', () => {
+  describe('Quando o metodo [setItemFinal] for chamado >>>>>>', () => {
     beforeEach(() => {
       component.setItemFinal( stub.mockItemFinal() );
     });
 
-    it('', () => {
+    it('Então o item deve ser salvo', () => {
       expect(component.itemFinal).toEqual( stub.mockItemFinal() );
     });
   });

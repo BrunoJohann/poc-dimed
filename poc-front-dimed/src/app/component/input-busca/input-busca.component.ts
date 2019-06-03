@@ -36,7 +36,7 @@ export class InputBuscaComponent {
             next: listaItens => {
               this.postDetalhe(listaItens)
             },
-            error: err => console.log(err)
+            error: () => console.error('Houve um erro na pesquisa')
           });
   }
 
