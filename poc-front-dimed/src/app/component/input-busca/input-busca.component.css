@@ -1,13 +1,18 @@
 .margin {
-    margin-top: 2%;
+    /* margin-top: 2%; */
+    background-color: rgba(70, 87, 247, 0.808)
 }
+
+/* .header {
+    background-color: rgba(15, 96, 150, 0.904)
+} */
 
 .estilo-input {
     text-align: center;
     font-size: 25px;
     width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin: 10px 0;
     box-sizing: border-box;
     border: 3px solid #ccc;
     -webkit-transition: 0.5s;
