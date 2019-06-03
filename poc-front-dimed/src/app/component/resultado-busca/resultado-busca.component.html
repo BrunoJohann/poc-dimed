@@ -1,28 +1,27 @@
 
-
-  <div class="container d-flex justify-content-center">
-    <table class="table table-hover">
-      <thead class="bg-info">
-        <tr>
-          <!-- <th scope="col">#</th> -->
-          <th scope="col">codigoItem</th>
-          <th scope="col">Descrição</th>
-          <th scope="col">Preco</th>
-          <th scope="col">Estoque</th>
-          <th scope="col">EAN</th>
+<div class="container d-flex justify-content-center">
+  <table class="table table-hover">
+    <thead class="bg-info">
+      <tr>
+        <!-- <th scope="col">#</th> -->
+        <th scope="col">codigoItem</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Preco</th>
+        <th scope="col">Estoque</th>
+        <th scope="col">EAN</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of listaDoPai; let cont = index">
+      <tr (click)="openModal(item)">
+          <ng-container *ngIf="item.mostrarItem && item.ean">
+            <!-- <th scope="row">{{ cont }}</th> -->
+            <td>{{ item.codigoItem }}</td>
+            <td>{{ item.nomenclaturaVarejo }}</td>
+            <td>{{ item.precoPor }}</td>
+            <td>{{ item.estoqueLoja }}</td>
+            <td >{{ item.ean }}</td>
+          </ng-container>  
         </tr>
-      </thead>
-      <tbody *ngFor="let item of listaDoPai; let cont = index">
-        <tr (click)="openModal(item)">
-            <ng-container *ngIf="item.mostrarItem && item.ean">
-              <!-- <th scope="row">{{ cont }}</th> -->
-              <td>{{ item.codigoItem }}</td>
-              <td>{{ item.nomenclaturaVarejo }}</td>
-              <td>{{ item.precoPor }}</td>
-              <td>{{ item.estoqueLoja }}</td>
-              <td >{{ item.ean }}</td>
-            </ng-container>  
-          </tr>
-      </tbody>
-    </table>
-  </div>
+    </tbody>
+  </table>
+</div>
