@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, OnChanges } from '@angular/core';
 import { forkJoin } from 'rxjs';
-import { retry } from 'rxjs/operators';
 
+import { ToastrService } from 'ngx-toastr';
 import { ItemFinal } from 'src/app/model/ItemFinal.model';
 
 import { BuscaInicialService } from 'src/app/services/busca/busca-inicial.service';
@@ -21,20 +21,35 @@ export class InputBuscaComponent {
   @Output() resBuscaApi = new EventEmitter();
 
   constructor(
+    public toastr: ToastrService,
     public buscaService: BuscaInicialService,
     public buscaDetalheService: BuscaDetalhesService,
     public buscaEstoqueService: BuscaEstoqueService,
     public buscaPrecoService: BuscaPrecoService ) { }
 
   buscaProduto(event: string) {
-  this.buscaService.getProduto(event)
-          .pipe(retry(3))
-          .subscribe({
-            next: listaItens => {
-              this.postDetalhe(listaItens)
-            },
-            error: () => console.error('Houve um erro na pesquisa')
-          });
+    if( event.length >= 3 ) {
+      this.buscaService.getProduto(event)
+            .subscribe({
+              next: listaItens => {
+                this.postDetalhe(listaItens)
+              },
+              error: () => this.eventoInvalido('Pesquisa Invalida')
+            });
+    } else {
+      this.eventoInvalido('Menor que 3')
+    }
+  }
+
+  eventoInvalido(tipo: string) {
+    switch(tipo) {
+      case 'Pesquisa Invalida':
+        this.toastr.warning('Produto não registrado')
+        break;
+      case 'Menor que 3': 
+        this.toastr.warning('Campo menor que 3 caracteres ','Pesquisa invalida')
+        break;
+    }
   }
 
   postDetalhe(listaItens: ItemFinal[]) {

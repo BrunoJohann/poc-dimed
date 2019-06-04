@@ -15,7 +15,7 @@ import { HttpBuscaInterceptorModule } from './interceptor/http-busca-interceptor
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
+    AppRoutingModule, 
     HttpBuscaInterceptorModule,
     PrimeiraTelaModule
   ],

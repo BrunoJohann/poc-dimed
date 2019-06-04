@@ -11,13 +11,14 @@ import { BuscaInicialService } from 'src/app/services/busca/busca-inicial.servic
 import { BuscaDetalhesService } from 'src/app/services/busca-detalhes/busca-detalhes.service';
 import { BuscaPrecoService } from 'src/app/services/busca-preco/busca-preco.service';
 import { BuscaEstoqueService } from 'src/app/services/busca-estoque/busca-estoque.service';
-import { HttpClient } from 'selenium-webdriver/http';
 import { ItemFinal } from 'src/app/model/ItemFinal.model';
+import { ToastrService, TOAST_CONFIG } from 'ngx-toastr';
 
 describe('InputBuscaComponent', () => {
   let component: InputBuscaComponent;
   let fixture: ComponentFixture<InputBuscaComponent>;
 
+  let toastr: ToastrService;
   let buscaService: BuscaInicialService;
   let detalheService: BuscaDetalhesService;
   let estoqueService: BuscaEstoqueService;
@@ -29,6 +30,7 @@ describe('InputBuscaComponent', () => {
         InputBuscaModule,
       ],
       providers: [
+        ToastrService,
         { provide: BuscaInicialService, useClass: stub },
         { provide: BuscaDetalhesService, useClass: stub },
         { provide: BuscaEstoqueService, useClass: stub },
@@ -41,6 +43,7 @@ describe('InputBuscaComponent', () => {
       detalheService = TestBed.get(BuscaDetalhesService);
       estoqueService = TestBed.get(BuscaEstoqueService);
       precoService = TestBed.get(BuscaPrecoService);
+      toastr = TestBed.get(ToastrService);
 
       fixture = TestBed.createComponent(InputBuscaComponent);
       component = fixture.componentInstance;
@@ -59,7 +62,7 @@ describe('InputBuscaComponent', () => {
       beforeEach(() => {
         spyOn(buscaService, 'getProduto').and.returnValue( of(stub.mockProduto()) );
         spyOn(component, 'postDetalhe')
-        component.buscaProduto('')
+        component.buscaProduto('para')
       });
   
       it('Então deve chamar a função [postDetalhe]', () => {
@@ -70,14 +73,52 @@ describe('InputBuscaComponent', () => {
     describe('E [getProduto] retorno um valor inválido', () => {
       beforeEach(() => {
         spyOn(buscaService, 'getProduto').and.returnValue( throwError('') );
-        spyOn(console, 'error');
+        spyOn(component, 'eventoInvalido')
+        component.buscaProduto('pwiqeqwjdoi');
+      });
+  
+      it('Então [eventoInvalido] deve ser chamado com o campo "Pesquisa Invalida"', () => {
+        expect(component.eventoInvalido).toHaveBeenCalledWith('Pesquisa Invalida');
+      });
+    });
+
+    describe('E o evento tenha menos de 3 caracteres', () => {
+      beforeEach(() => {
+        spyOn(component, 'eventoInvalido')
         component.buscaProduto('');
       });
   
-      it('Então deve aparecer um mensagem de erro no console com valor "Houve um erro na pesquisa"', () => {
-        expect(console.error).toHaveBeenCalledWith('Houve um erro na pesquisa');
+      it('Então [eventoInvalido] deve ser chamado com o campo "Menor que 3"', () => {
+        expect(component.eventoInvalido).toHaveBeenCalledWith('Menor que 3');
       });
     });
+  });
+
+  describe('Dado que [eventoInvalido] tenha sido chamada >>>>', () => {
+    beforeEach(() => {
+      spyOn(toastr, 'warning')
+
+    });
+
+    describe('E tenha sido chamado com o campo "Pesquisa Invalida"', () => {
+      beforeEach(() => {
+        component.eventoInvalido('Pesquisa Invalida')
+      });
+
+      it('', () => {
+        expect(toastr.warning).toHaveBeenCalled();
+      });
+    })
+
+    describe('E tenha sido chamado com o campo "Menor que 3"', () => {
+      beforeEach(() => {
+        component.eventoInvalido('Menor que 3')
+      });
+
+      it('', () => {
+        expect(toastr.warning).toHaveBeenCalled();
+      });
+    })
   });
 
   describe('Dado que [postDetalhe] tenha sido chamada >>>>', () => {

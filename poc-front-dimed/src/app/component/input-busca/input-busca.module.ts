@@ -5,13 +5,17 @@ import { BuscaInicialService } from 'src/app/services/busca/busca-inicial.servic
 import { BuscaDetalhesService } from 'src/app/services/busca-detalhes/busca-detalhes.service';
 import { BuscaEstoqueService } from 'src/app/services/busca-estoque/busca-estoque.service';
 import { BuscaPrecoService } from 'src/app/services/busca-preco/busca-preco.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     InputBuscaComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   exports: [
     InputBuscaComponent
